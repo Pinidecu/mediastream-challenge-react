@@ -12,7 +12,7 @@
  */
 
 import "./assets/styles.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Exercise01() {
   const movies = [

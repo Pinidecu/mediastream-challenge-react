@@ -90,6 +90,13 @@
   font-weight: bold;
   padding: 0 1em;
 }
+
+.orderSelected {
+  background-color: greenyellow;
+  border: none;
+  font-weight: bold;
+  padding: 0 1em;
+}
 .order:hover {
   background-color: greenyellow;
 }

@@ -22,7 +22,7 @@ export default function Exercise02() {
   const [loading, setLoading] = useState(false);
   const [genres, setGenres] = useState([]);
   const [filter, setFilter] = useState("Todas");
-  const [order, setOrder] = useState("Descending");
+  const [order, setOrder] = useState("");
 
   const handleMovieFetch = () => {
     setLoading(true);
@@ -55,7 +55,6 @@ export default function Exercise02() {
   useEffect(() => {
     handleMovieFetch();
     handleGenresFetch();
-    moviesOrder();
   }, []);
 
   useEffect(() => {
@@ -69,21 +68,12 @@ export default function Exercise02() {
   const handleFilter = function (e) {
     setFilter(e.target.value);
   };
-  const handleOrder = function (e) {
-    setOrder(e.target.value);
-  };
 
   const moviesFilter = function (e) {
     if (filter === "Todas") {
       setMoviesRender(movies);
     } else {
-      let moviesFilter = movies.filter((m) => {
-        console.log(m.genres);
-        console.log(filter);
-        console.log(m.genres.includes(filter));
-
-        return m.genres.includes(filter);
-      });
+      let moviesFilter = movies.filter((m) => m.genres.includes(filter));
       console.log("aaaaa", moviesFilter);
       setMoviesRender(moviesFilter);
     }
@@ -115,8 +105,7 @@ export default function Exercise02() {
     }
     setMoviesRender(moviesOrdened);
   };
-
-  console.log(filter);
+console.log(order)
   return (
     <section className="movie-library">
       <div className="movie-library__image">
@@ -132,12 +121,15 @@ export default function Exercise02() {
               <option value={o}>{o}</option>
             ))}
           </select>
-          <button onClick={() => setOrder("Descending")} className="order">
+          <button
+            onClick={() => setOrder("Descending")}
+            className={order === "Descending" ? "orderSelected" : "order"}
+          >
             Year Descending
           </button>
           <button
             onClick={() => setOrder("Ascending")}
-            className="order"
+            className={order === "Ascending" ? "orderSelected" : "order"}
             id="button2"
           >
             Year Ascending
@@ -155,7 +147,7 @@ export default function Exercise02() {
             <li key={movie.id} className="movie-library__card">
               <img src={movie.posterUrl} alt={movie.title} />
               <ul className="movie-library__info">
-                <li id='title'>{movie.title}</li>
+                <li id="title">{movie.title}</li>
                 <li>{movie.genres.join(", ")}</li>
                 <li>{movie.year}</li>
               </ul>

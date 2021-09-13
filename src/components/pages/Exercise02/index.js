@@ -61,6 +61,7 @@ export default function Exercise02() {
     moviesFilter();
   }, [filter]);
 
+
   useEffect(() => {
     moviesOrder();
   }, [order]);
@@ -79,14 +80,14 @@ export default function Exercise02() {
     }
   };
 
-  const moviesOrder = function (e) {
+  const moviesOrder = function (order) {
     let moviesOrdened = moviesRender;
     if (order === "Descending") {
       moviesOrdened.sort(function (a, b) {
-        if (a.year > b.year) {
+        if (a.year < b.year) {
           return 1;
         }
-        if (a.year < b.year) {
+        if (a.year > b.year) {
           return -1;
         }
         return 0;
@@ -94,10 +95,10 @@ export default function Exercise02() {
     }
     if (order === "Ascending") {
       moviesOrdened.sort(function (a, b) {
-        if (a.year < b.year) {
+        if (a.year > b.year) {
           return 1;
         }
-        if (a.year > b.year) {
+        if (a.year < b.year) {
           return -1;
         }
         return 0;
@@ -105,7 +106,6 @@ export default function Exercise02() {
     }
     setMoviesRender(moviesOrdened);
   };
-console.log(order)
   return (
     <section className="movie-library">
       <div className="movie-library__image">
@@ -117,18 +117,26 @@ console.log(order)
             onChange={handleFilter}
           >
             <option value="Todas">Todas</option>
-            {genres.map((o) => (
-              <option value={o}>{o}</option>
+            {genres.map((o, i) => (
+              <option value={o} key={i}>
+                {o}
+              </option>
             ))}
           </select>
           <button
-            onClick={() => setOrder("Descending")}
+            onClick={() => {
+              setOrder("Descending");
+              moviesOrder("Descending");
+            }}
             className={order === "Descending" ? "orderSelected" : "order"}
           >
             Year Descending
           </button>
           <button
-            onClick={() => setOrder("Ascending")}
+            onClick={() => {
+              setOrder("Ascending");
+              moviesOrder("Ascending");
+            }}
             className={order === "Ascending" ? "orderSelected" : "order"}
             id="button2"
           >

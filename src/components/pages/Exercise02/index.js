@@ -71,6 +71,7 @@ export default function Exercise02() {
   };
 
   const moviesFilter = function (e) {
+    setOrder('');
     if (filter === "Todas") {
       setMoviesRender(movies);
     } else {

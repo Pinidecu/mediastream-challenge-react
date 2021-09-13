@@ -97,9 +97,6 @@
   font-weight: bold;
   padding: 0 1em;
 }
-.order:hover {
-  background-color: greenyellow;
-}
 #button2 {
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
